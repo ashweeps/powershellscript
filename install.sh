@@ -1,0 +1,10 @@
+install.sh #Instalar powershell en code space, esta línea es solo un título o comentario. No se ejecuta, sirve para que cualquier persona sepa qué hace el script.
+sudo apt-get update #Actualiza la lista de programas disponibles en Ubuntu, es importante porque asi el sistema podría intentar instalar versiones antiguas o no encontrar paquetes nuevos.
+sudo apt-get install -y wget apt-transport-https software-properties-common #Instala 3 herramientas necesarias: 1)wget, permite descargar archivos desde internet usando comandos.2)apt-transport-https, permite que el administrador de paquetes use repositorios HTTPS, que son más seguros.3)software-properties-common, añade funciones extra para manejar repositorios externos. Además -y significa “sí a todo”, para que no pregunte confirmación.
+source /etc/os-release #Este comando lee un archivo del sistema que contiene información sobre la versión de Ubuntu.
+wget -q https://packages.microsoft.com/config/ubuntu/$VERSION_ID/packages-microsoft-prod.deb #Aquí se descarga el repositorio oficial de Microsoft en un archivo .deb. Ya que wget descarga el archivo y -q significa “quiet” (silencioso), para que no muestre mensajes. Además $VERSION_ID inserta automáticamente la versión de Ubuntu cargada antes, este archivo contiene las claves y configuración necesarias para instalar software de Microsoft.
+sudo dpkg -i packages-microsoft-prod.deb #Este comando instala el archivo .deb que se descargó, agrega el repositorio de Microsoft a tu sistema, permitiendo instalar PowerShell directamente desde apt.
+rm packages-microsoft-prod.deb #Borra el archivo que ya no se necesita para mantener limpio el sistema y ahorrar espacio
+sudo apt-get updat #Su objetivo es actualizar nuevamente la lista de paquetes, esta vez incluyendo los paquetes del repositorio de Microsoft.
+sudo apt-get install -y powershell #Aquí se instala PowerShell desde el repositorio de Microsoft, -y acepta todo automáticamente.
+pwsh #Este comando inicia PowerShell, es el nombre del ejecutable de PowerShell en Linux.
